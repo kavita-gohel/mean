@@ -1,0 +1,11 @@
+img{
+    
+    height: 100px;
+    width: 100px;
+    border:1px solid;
+    border-radius:80%;
+    border-color: gray;
+    align-items: center;     
+    margin-left: 200px;
+    margin-top: 100px;
+}   

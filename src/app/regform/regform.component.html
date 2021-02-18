@@ -1,0 +1,84 @@
+
+
+<mat-toolbar>
+    <span class="fill-remaining-space">Registration Form </span>
+  </mat-toolbar>
+  
+  <mat-dialog-content class="mat-typography">
+  <div class="container" novalidate> 
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form" >
+    
+
+          <mat-form-field class="form-element">
+            <input matInput placeholder="First name" formControlName="fname">
+            <mat-error *ngIf="!fname.valid && fname.touched">
+              {{ titleAlert }}
+            </mat-error>
+            </mat-form-field>
+        <mat-form-field class="form-element">
+          <input matInput placeholder="Last name" formControlName="lname">
+            <mat-error *ngIf="!lname.valid && lname.touched">
+              {{ titleAlert }}
+            </mat-error>
+        </mat-form-field>
+       <mat-form-field class="form-element">
+        <input matInput placeholder="Email address" formControlName="email" type="email">
+        <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
+          {{ getErrorEmail() }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <input matInput placeholder="Mobile number" formControlName="mono" type="tel">
+          <mat-error *ngIf="!formGroup.controls['mono'].valid && formGroup.controls['mono'].touched">
+            {{ getErrorContact() }}
+          </mat-error>
+      </mat-form-field>
+      <div class="form-element">
+        <label>Gender : </label>
+        <mat-radio-group formControlName="gender">
+          <mat-radio-button value="male">Male</mat-radio-button>
+          <mat-radio-button value="female">Female</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <mat-list-item class="primary-imenu-item" role="listitem">
+            <mat-form-field class="form-element">
+                <mat-select 
+                placeholder="Hobbies" 
+                name="hobby" 
+               
+                formControlName="hobby"
+                class="filter-select" 
+                multiple >
+                  <mat-option *ngFor="let hobbies of hobby" [value]="hobbies">
+                    {{hobbies}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+          </mat-list-item>
+
+          <div class="form-element">
+            <label for="file">Choose File</label>
+            <input type="file"
+                   id="file"
+                   (change)="handleFileInput($event.target.files)" formControlName="picture">
+        </div>
+
+
+        <!-- <mat-form-field class="form-element">
+            <mat-select name="hobbies" multiple>
+                <mat-option *ngFor="let hobbies of hobby" [value]="hobbies">
+                   {{ hobbies }}
+                </mat-option>
+           </mat-select>
+        </mat-form-field> -->
+       <div class="form-element">
+        <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Register</button>
+        
+      </div>
+  </form>
+  </div>
+
+
+    </mat-dialog-content>
+ 

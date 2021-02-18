@@ -1,0 +1,97 @@
+<p >User : {{user2}}</p>
+
+<!-- <table>
+    <tr>
+        <th>
+            <h4><u>Add Task</u></h4>
+           
+        </th>
+        <th>
+            <h4><u>Completed Task</u></h4>
+        </th>
+    </tr>
+    <tr>
+
+        <td>
+        <mat-form-field>
+        <input matInput placeholder="Add new task" #newtaskinput>
+        </mat-form-field>
+        <button [disabled]="newtaskinput.value == ''" mat-stroked-button color="primary" (click)="addTask(newtaskinput.value); newtaskinput.value = ''">Add</button>
+    <mat-card *ngIf="tasks.length > 0">
+        <div
+        cdkDrop
+        #new="cdkDrop"
+        [cdkDropData]="tasks"
+        [cdkDropConnectedTo]="[done]"
+        (cdkDropDropped)="dropped($event)">
+        <mat-list>
+            <mat-list-item *ngFor="let task of tasks;let i = index">
+                <mat-divider *ngIf="i >= 0"></mat-divider>
+                <span cdkDrag>{{task.text}}</span> 
+            </mat-list-item>         
+        </mat-list>
+    </mat-card>
+    </div>
+</td>
+<td>
+    <div
+      cdkDrop
+      #done="cdkDrop"
+      [cdkDropData]="done"
+      [cdkDropConnectedTo]="[tasks]"
+      (cdkDropDropped)="dropped($event)"
+    >
+  
+    </div>
+</td>
+</tr>
+</table> -->
+<div class="container">
+
+
+    <div class="list-container">
+        <mat-form-field>
+            <input matInput placeholder="Add new task" #newtaskinput>
+            </mat-form-field>
+            <button [disabled]="newtaskinput.value == ''" mat-stroked-button color="primary" (click)="addTask(newtaskinput.value); newtaskinput.value = ''">Add</button>
+      <div class="todo-container column-container">
+        <div class="list"
+             cdkDropList
+             #todoList="cdkDropList"
+             [cdkDropListData]="todos"
+             [cdkDropListConnectedTo]="[doneList]"
+             (cdkDropListDropped)="onDrop($event)">
+          <h2>To do task</h2>
+            <!-- <p>{{task1}}</p> -->
+            <mat-card-subtitle *ngIf="todos.length == 0">No tasks Added</mat-card-subtitle>
+          <mat-card *ngFor="let todo of todos" cdkDrag>
+          
+            <mat-card-header >
+              
+                <mat-card-title>{{todo.text}}</mat-card-title>
+           
+            </mat-card-header>
+          </mat-card>
+        </div>
+      </div>
+  
+      <div class="done-container column-container">
+        <div class="list"
+             cdkDropList
+             #doneList="cdkDropList"
+             [cdkDropListData]="completed"
+             [cdkDropListConnectedTo]="todoList"
+             (cdkDropListDropped)="onDrop($event)">
+          <h2>Completed</h2>
+          <mat-card-subtitle *ngIf="completed.length == 0">No any completed tasks </mat-card-subtitle>
+          <mat-card *ngFor="let complete of completed">
+            <mat-card-header>
+              <mat-card-title>{{complete.text}}</mat-card-title>
+           
+            </mat-card-header>
+          </mat-card>
+        </div>
+      </div>
+  
+    </div>
+  </div>

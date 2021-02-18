@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="col-md-4">
+    <app-profile></app-profile>
+    </div>
+    <div class="col-md-8">
+ 
+      <mat-tab-group mat-align-tabs="start">
+        <mat-tab label="Personal Details" >
+       <mat-card>
+        Username : &nbsp;&nbsp; {{user.fname}} &nbsp;&nbsp;{{user.lname}}
+        <hr>
+        
+          Email : &nbsp;&nbsp; {{user.email}}
+           <hr>
+               Gender : &nbsp;&nbsp; {{user.gender}}
+                <hr>
+                    Contact No. : &nbsp;&nbsp; {{user.mono}}
+                    <hr>  Profile URL : &nbsp;&nbsp; {{user.picture}}
+                      
+                      <hr>
+                      <button button mat-stroked-button class=".btn" (click)="addNote(user)">
+                        Take Notes</button>
+                      </mat-card>
+          </mat-tab>
+
+
+        <mat-tab label="Hobbies" >
+            <mat-list>
+                <mat-list-item *ngFor="let hobbies of hobby">
+                  <p>{{hobbies}}
+                <mat-divider></mat-divider></p>
+                </mat-list-item>
+                <!-- <mat-list-item>{{user.hobbies[1]}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>{{user.hobbies[2]}}</mat-list-item> -->
+              </mat-list>
+        </mat-tab>
+        
+     
+      </mat-tab-group>
+      
+      
+  
+</div>
+
+</div>
+
+
+

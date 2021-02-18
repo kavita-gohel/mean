@@ -1,0 +1,68 @@
+<!-- 
+<div>
+    <h4>Google Login</h4>
+    <form>
+      <input type="email" id="email" name="email"/>
+      <input type="password" id="password" name="password"/>
+      <button type="submit" name="signin" id="signin" value="signin" (click)="signInWithGmail(email,password)">login</button>
+    </form>
+  </div>
+  <div>
+    
+    <button (click)="signInWithGoogle()">Sign Up</button>
+  </div> -->
+
+
+<div class="container"> 
+<mat-card>
+  <mat-card-content>
+    <div class="header">
+      <img src="assets\img\google.svg" height="70px" width="80px" />
+      <p>Login With Gmail </p>
+   
+    </div>
+    <form (ngSubmit)="onLogin()" name="loginForm" [formGroup]="loginForm">
+      <div class="emailInput">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            formControlName="email"
+            matInput
+            placeholder="Enter email address" required
+          />
+          <mat-error *ngIf="!loginForm.controls['email'].valid">
+              Email is required
+            </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <!-- <span>
+          <a class="text-link" class="aLink" routerLink="/auth/forgot-password">Forgot Password?</a>
+        </span> -->
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
+          <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>
+              {{hide ? 'visibility_off' : 'visibility'}}
+          </mat-icon>
+      </button>
+      <mat-error *ngIf="!loginForm.controls['password'].valid">
+          Password is required
+        </mat-error>
+      </mat-form-field>
+      </div>
+      <button mat-flat-button color="primary" [disabled]="loginForm.invalid" >
+      Login</button><br><br>
+    
+      <img src="assets\img\btn_signin.png" (click)="signInWithGoogle()" width="200px" height="50px" />
+      <!-- <button mat-flat-button color="primary"  (click)="signInWithGoogle()">Sign in with Google</button><br><br> -->
+     
+    </form>
+
+    
+  </mat-card-content>
+</mat-card>
+</div>  

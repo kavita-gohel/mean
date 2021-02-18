@@ -1,0 +1,233 @@
+<div>
+    <table width="100%">
+        <tr>
+            <td width="80%">
+                <h1>Users</h1>
+            </td>
+            <td>{{username}}</td>
+        </tr>
+        <tr>  
+              <td></td>
+            <td>
+                <button mat-raised-button>Add New User</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+<!-- <div>
+  <mat-accordion>
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{registration.fname}}&nbsp;&nbsp;&nbsp;&nbsp;{{registration.lname}}
+        </mat-panel-title>
+       </mat-expansion-panel-header>
+        <div>
+             {{registration.email}}
+             <hr>
+            {{registration.mono}}
+            <hr>
+            <button mat-raised-button (click)="profileRegistration(registration)" >View Full Profile</button>
+         </div>
+
+    </mat-expansion-panel>
+    </mat-accordion>
+</div>  -->
+
+ 
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let item of user">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{item.fname}}
+      </mat-panel-title>
+     </mat-expansion-panel-header>
+      <div>
+           {{item.email}}
+           <hr>
+          {{item.mono}}
+          <hr>
+          <button mat-raised-button (click)="viewProfile(item)" >View Full Profile</button>
+          <button mat-raised-button (click)="openDialog(item)">Update Profile</button>
+          <button mat-raised-button (click)="deleteProfile(item._id)" >Delete Profile</button>
+       </div>
+
+  </mat-expansion-panel>
+  </mat-accordion>
+ 
+<!--  
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let item of user" >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{item.fname}}
+        </mat-panel-title>
+       </mat-expansion-panel-header>
+        <div>
+             {{item.email}}
+             <hr>
+            {{item.mono}}
+            <hr>
+            <button mat-raised-button (click)="viewProfile(item)" >View Full Profile</button>
+         </div>
+
+    </mat-expansion-panel>
+    </mat-accordion> -->
+
+
+  <!-- <div style="display: flex; flex-grow: grow">
+
+    <app-single-user [user]="data"></app-single-user>
+</div> -->
+<!-- <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title >
+          {{uname[0]}}
+        </mat-panel-title>
+       </mat-expansion-panel-header>
+        <div>
+             {{mail[0]}}
+             <hr>
+            {{moNo[0]}}
+            <hr>
+            <button mat-raised-button >View Full Profile</button>
+         </div>
+
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title >
+            {{uname[1]}}
+          </mat-panel-title>
+         </mat-expansion-panel-header>
+          <div>
+              {{mail[1]}}
+               <hr>
+              {{moNo[1]}}
+              <hr>
+              <button mat-raised-button>View Full Profile</button>
+           </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title >
+            {{uname[2]}}
+          </mat-panel-title>
+         </mat-expansion-panel-header>
+          <div>
+            {{mail[2]}}
+               <hr>
+               {{moNo[2]}}
+               <hr>
+               <button mat-raised-button>View Full Profile</button>
+           </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title >
+            {{uname[3]}}
+          </mat-panel-title>
+         </mat-expansion-panel-header>
+          <div>
+            {{mail[3]}}
+               <hr>
+               {{moNo[3]}}
+               <hr>
+               <button mat-raised-button>View Full Profile</button>
+           </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title >
+            {{uname[4]}}
+          </mat-panel-title>
+         </mat-expansion-panel-header>
+          <div>
+            {{mail[4]}}
+               <hr>
+               {{moNo[4]}}
+               <hr>
+               <button mat-raised-button>View Full Profile</button>
+           </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title >
+            {{uname[5]}}
+          </mat-panel-title>
+         </mat-expansion-panel-header>
+          <div>
+            {{mail[5]}}
+               <hr>
+               {{moNo[5]}}
+               <hr>
+               <button mat-raised-button>View Full Profile</button>
+
+           </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title >
+            {{uname[6]}}
+          </mat-panel-title>
+         </mat-expansion-panel-header>
+          <div>
+            {{mail[6]}}
+               <hr>
+               {{moNo[6]}}
+               <hr>
+               <button mat-raised-button>View Full Profile</button>
+
+           </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title >
+            {{uname[7]}}
+          </mat-panel-title>
+         </mat-expansion-panel-header>
+          <div>
+            {{mail[7]}}
+               <hr>
+               {{moNo[7]}}
+               <hr>
+               <button mat-raised-button>View Full Profile</button>
+
+           </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title >
+            {{uname[8]}}
+          </mat-panel-title>
+         </mat-expansion-panel-header>
+          <div>
+            {{mail[8]}}
+               <hr>
+               {{moNo[8]}}
+               <hr>
+               <button mat-raised-button>View Full Profile</button>
+
+           </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title >
+            {{uname[9]}}
+          </mat-panel-title>
+         </mat-expansion-panel-header>
+          <div>
+            {{mail[9]}}
+               <hr>
+               {{moNo[9]}}
+               <hr>
+               <button mat-raised-button>View Full Profile</button>
+
+           </div>
+      </mat-expansion-panel>
+</mat-accordion>
+-->

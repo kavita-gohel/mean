@@ -1,0 +1,16 @@
+table, tr, td{
+    margin: 15px;
+    color: darkslategray;
+}
+#item{
+width: 100%;
+text-align: left 20px;
+}
+
+mat-expansion-panel{
+    padding-left: 150px;
+    padding-right: 150px;
+}
+h1{
+    margin-left: 80px;
+}

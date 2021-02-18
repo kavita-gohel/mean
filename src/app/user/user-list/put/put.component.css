@@ -1,0 +1,29 @@
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .form-element {
+    padding: 5px 0px 25px 2px;
+    width: 100%;
+  }
+
+  .button {
+    width: 100%;
+  }
+  mat-toolbar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
