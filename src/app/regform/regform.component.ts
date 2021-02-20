@@ -16,7 +16,9 @@ import { PutComponent } from '../user/user-list/put/put.component';
   styleUrls: ['./regform.component.css']
 })
 export class RegformComponent implements OnInit {
- 
+   formData = new FormData();
+
+  
   formGroup: FormGroup;
   titleAlert: string = 'This field is required';
   post: any = '';
@@ -30,12 +32,12 @@ export class RegformComponent implements OnInit {
   // hobby ['Travelling','Swmming','Cooking','Singing','Reading']
   constructor(private router: Router, private _userService : UserService, public dialogRef: MatDialogRef<RegformComponent>,
     @Inject(MAT_DIALOG_DATA) private data) { }
-
+  
   ngOnInit() {
      console.log("data...",this.data);
     
        this.createForm(this.data.data);
-
+      
     // this.createForm(); 
     this.hobby = ['Travelling','Swimming','Cooking','Singing','Reading'];
     //   {'Travelling'},
@@ -54,7 +56,9 @@ export class RegformComponent implements OnInit {
       gender: new FormControl((data && data.gender)? data.gender : '', Validators.required),
       mono: new FormControl((data && data.mono)? data.mono : '', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
       hobby: new FormControl((data && data.hobby)? data.hobby : '', Validators.required),
-      picture: new FormControl((data && data.picture)? data.picture : '',Validators.required)
+      photo: new FormControl((data && data.photo)? data.photo : '',Validators.required),
+      // photo: new FormData(photo) 
+      // this.formData.append('photo',photo);
     // this = this.formBuilder.group({
     //   'email': [null, [Validators.required, Validators.pattern(emailregex)], this.checkInUseEmail],
     //   'fname': [null, Validators.required],
@@ -63,6 +67,7 @@ export class RegformComponent implements OnInit {
     //   'mono': [null, [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
     //   'hobby': ['',Validators.required]
     });
+   
   }
   
   // createForm() {
@@ -104,7 +109,7 @@ export class RegformComponent implements OnInit {
     return this.formGroup.get('email') as FormControl
   }
   get picture() {
-    return this.formGroup.get('picture') as FormControl
+    return this.formGroup.get('photo') as FormControl
   }
  
   // checkInUseEmail(control) {
@@ -142,15 +147,17 @@ export class RegformComponent implements OnInit {
       } );
       this.dialogRef.close(this.data);
             //  this.post = post;
-       
+     
      }
     else{
-     
+      this.formData.append('photo',this.formGroup.value.photo);
       this._userService.addUser(this.formGroup.value)
         .subscribe(data => {
         
           console.log("post--->",data);
       } );
+
+      
     }
     // console.log(this.formGroup.value);
     // this.router.navigate(['./dashboard']);
@@ -174,6 +181,7 @@ export class RegformComponent implements OnInit {
   //   this.router.navigateByUrl('/dashboard', { state: { view: this.formGroup.value} });
  
   // }
+  
   
  }
  

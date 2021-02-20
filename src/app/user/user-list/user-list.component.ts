@@ -50,7 +50,7 @@ export class UserListComponent implements OnInit {
         if (this.router.getCurrentNavigation().extras.state.view) {
           console.log("in second if, data is", this.router.getCurrentNavigation().extras.state.view);
            this.userReg = this.router.getCurrentNavigation().extras.state.view;
-           this.user.push( this.router.getCurrentNavigation().extras.state.view);
+          //  this.user.push( this.router.getCurrentNavigation().extras.state.view);
           
           //this.plannerData = this.router.getCurrentNavigation().extras.state.data
                   }
@@ -62,22 +62,20 @@ export class UserListComponent implements OnInit {
     
   }
      ngOnInit() {
-    //    this.authService.authState.subscribe((user2) => {
-    //     this.user2 = user2;
-    //     this.username = this.user2.name;
-    //  //   console.log(user.name);
-    //   });
+       this.authService.authState.subscribe((user2) => {
+        this.user2 = user2;
+        this.username = this.user2.name;
+     //   console.log(user.name);
+      });
         //  this.user = this._userService.getData();
         // this.user.push( this.userReg);
-      
-   
-
-    
-      this._userService.getData().subscribe((data) => {
+ 
+        this._userService.getData().subscribe((data) => {
         // console.log(data);
         this.user = data;
-        // console.log("get data----",this.user);
-        });
+        console.log("get data----",this.user);
+        
+        })
               
       }
 
@@ -94,9 +92,10 @@ export class UserListComponent implements OnInit {
     openDialog(data:any) {
       
       console.log("openDialog()--->",data);
-     let obj ={
+      let obj ={
        data:data,
        isupdated:true
+    
      }
      this.dialog.open(RegformComponent,{data: obj});
     //  this.dialogRef.afterClosed().subscribe(result => {  
@@ -113,14 +112,20 @@ export class UserListComponent implements OnInit {
         // console.log(`Dialog result: ${result}`);
      
       // });
+      
     }
 
-       deleteProfile(id:any){
-   
+       deleteProfile(id:any,index){
+              console.log("deleted data-->",id,index)
               this._userService.deleteUser(id).subscribe(data => {
                 console.log("deleted data-->",data)
-                // this.getData()
-          });
+              
+              //   // this.getData()
+          }
+          ),(err) => {
+            console.error("error-->",err)
+          }
+          this.user.splice(index,1);
         }
     
 

@@ -24,6 +24,7 @@ export class SingleUserComponent implements OnInit {
   profile:any;
   data: any;
   hobby: any = [];
+  photo: any;
   constructor(private _userService : UserService, private route: Router, private router: ActivatedRoute) { 
     // this.router.queryParams.subscribe(params => {
     
@@ -36,7 +37,7 @@ export class SingleUserComponent implements OnInit {
         if (this.route.getCurrentNavigation().extras.state.view) {
           console.log("in second if, data is", this.route.getCurrentNavigation().extras.state.view);
           this.user = this.route.getCurrentNavigation().extras.state.view;
-          this.profile=this.user.picture;
+          this.photo=this.user.photo;
           this.hobby = this.user.hobby;
           console.log(this.hobby)
           // console.log("hobbylist in single profile",this.hobby);

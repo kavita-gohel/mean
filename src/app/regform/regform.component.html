@@ -1,16 +1,16 @@
 
 
 <mat-toolbar>
-    <span class="fill-remaining-space">Registration Form </span>
+    <span class="fill-remaining-space">Registration Form TEST </span>
   </mat-toolbar>
   
   <mat-dialog-content class="mat-typography">
   <div class="container" novalidate> 
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form" >
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form" enctype="multipart/form-data">
     
 
           <mat-form-field class="form-element">
-            <input matInput placeholder="First name" formControlName="fname">
+            <input matInput placeholder="First name" formControlName="fname" >
             <mat-error *ngIf="!fname.valid && fname.touched">
               {{ titleAlert }}
             </mat-error>
@@ -58,10 +58,16 @@
           </mat-list-item>
 
           <div class="form-element">
+            <mat-form-field>
             <label for="file">Choose File</label>
-            <input type="file"
+            <ngx-mat-file-input placeholder="Only photos" [accept]="'.jpg, .jpeg, .png'" (change)="onChange($event)">
+
+            </ngx-mat-file-input>
+            <mat-form-field>
+            <!-- <input type="file"
                    id="file"
-                   (change)="handleFileInput($event.target.files)" formControlName="picture">
+                   name="photo"
+                   (change)="handleFileInput($event)" formControlName="photo"> -->
         </div>
 
 

@@ -40,6 +40,8 @@ export class UserService {
       return this.http.put('http://localhost:3001/user/'+id,data,{headers: headers});
      
     }
+
+    
     
     // updateUser(data:any){
    
