@@ -2,14 +2,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');
+// const multer = require('multer');
+// var upload = multer({ dest: 'uploads/' });
+
 // create express app
 const app = express();
+
 mongoose.set('useFindAndModify', false);
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
 // app.use(express.bodyParser());
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
+
 
 // define a simple route
 app.get('/', (req, res) => {
@@ -41,6 +46,29 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+
+
+
+
+
+
+// app.post('/img',upload.single('photo'),(req, res) => {
+//     if (!req.file) {
+//         console.log("No file received");
+//         return res.send({
+//           success: false
+//         });
+    
+//       } else {
+//         console.log('file received');
+//         return res.send({
+//           success: true
+//         })
+//       }
+//   });
+
+
+
 
 mongoose.Promise = global.Promise;
 
