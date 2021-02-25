@@ -2,14 +2,28 @@ const express = require('express');
 const multer = require('multer');
 // var upload = multer({ dest: 'uploads/' });
 const daoFile = require('../dao/user.dao');
-const { findOneAndUpdate } = require('../models/user.model.js');
-const User = require('../models/user.model.js');
-const userController = {};
+const { findOneAndUpdate, create } = require('../models/user.model.js');
 
-userController.create = (req, res) => {
-    // console.log("upload function", req.file)
-    daoFile.create(req)
+const userController = {};
+const app = express();
+// const imgUpload = require('../service');
+
+// userController.imgUpload = (req,res) => {
+//     return  res.send(req);
+    
+// }
+    // var router = express.Router();
+    // const fs = require('fs');
+  
+    
+      userController.create = (req, res) => {
+        // imgUpload(req);
+        
+    // console.log("upload function", req.body)
+   
+         daoFile.create(req)
             .then((data) => {
+            
               return  res.send(data);
               
             })
@@ -18,24 +32,39 @@ userController.create = (req, res) => {
             })
   }
 
-    userController.upload = (req, res) => {
-    console.log("upload function", req.file)
-
-    // // let upload = multer({ fileFilter: helpers.imageFilter }).single('photo');
-
-        // upload(req, res , function(err){
-        if (!req.file) {
-                    console.log("No file received",res);
-                    return res.send({
-                      success: false
-                    });
-                
-                  } else {
-                    console.log('file received',req.file);
-                    return (res.send(req.file));
-                  }
-        //  })
+  
+    userController.login = (req, res) => {
+        daoFile.login(req,res)
+        .then((data) => {
+         console.log("psw-->",user.data.password);
+         flag= delete user.data.password;
+         console.log("flag",flag);
+            console.log("data on login() controller--->",data);
+            return  res.send(data)
+            
+        })
+        .catch((err) => {
+            return res.send(err)
+        })
     }
+    // userController.upload = (req, res) => {
+    // console.log("upload function", req.file)
+
+    // // // let upload = multer({ fileFilter: helpers.imageFilter }).single('photo');
+
+    //     // upload(req, res , function(err){
+    //     if (!req.file) {
+    //                 console.log("No file received",res);
+    //                 return res.send({
+    //                   success: false
+    //                 });
+                
+    //               } else {
+    //                 console.log('file received',req.file);
+    //                 return (res.send(req.file));
+    //               }
+    //     //  })
+    // }
     // userController.uploads = (req, res) => {
     //     console.log("upload function", req.files)
     
@@ -278,5 +307,5 @@ userController.delete = (req, res) => {
 //     });
 // };
 
-// module.exports=daoFile
+module.exports=daoFile
 module.exports = userController;
