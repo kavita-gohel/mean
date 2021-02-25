@@ -1,3 +1,6 @@
+import { EditpostComponent } from './editpost/editpost.component';
+import { ViewpostComponent } from './viewpost/viewpost.component';
+
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 import { SocialLoginModule,AuthServiceConfig } from "angularx-social-login";
@@ -6,7 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './service/user.service';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule} from './app-routing.module';
@@ -37,7 +40,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { RegformComponent } from './regform/regform.component';
 import { MatAutocompleteModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatGridListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule, MatToolbarModule, MatTooltipModule, MatStepperModule } from '@angular/material';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { PutComponent } from './user/user-list/put/put.component';
+import { PostsComponent } from './posts/posts.component';
+import { CdkColumnDef } from '@angular/cdk/table';
+
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -62,12 +67,14 @@ export function provideConfig() {
     SingleUserComponent,
     LoginComponent,
     TodoComponent,
-    PutComponent,
+    PostsComponent,
     RegformComponent,
- 
+    ViewpostComponent ,
+    EditpostComponent
   ],
  
   imports: [
+
     ReactiveFormsModule,
     MatDialogModule,
     BrowserModule,
@@ -126,9 +133,11 @@ export function provideConfig() {
   MatToolbarModule,
   MatTooltipModule,
   MatStepperModule,
+  
   NgMultiSelectDropDownModule.forRoot()
   ],
   exports:[
+   
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -170,7 +179,8 @@ export function provideConfig() {
     },
     { provide: MatDialogTitle, useValue: {} }, 
     { provide: MatDialogRef, useValue: {} }, 
-    { provide: MAT_DIALOG_DATA, useValue: [] }
+    { provide: MAT_DIALOG_DATA, useValue: [] },
+  
   ],
   bootstrap: [AppComponent]
 })

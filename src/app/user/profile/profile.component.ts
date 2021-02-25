@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
   // ];
   //randomItem:any
   user:any
+  photo: any;
   
   constructor(private _userService : UserService, private route: Router, private router: ActivatedRoute) {
     this.router.queryParams.subscribe(params => {
@@ -34,7 +35,8 @@ export class ProfileComponent implements OnInit {
         if (this.route.getCurrentNavigation().extras.state.view) {
        //   console.log("in second if, data is", this.route.getCurrentNavigation().extras.state.view);
           this.user = this.route.getCurrentNavigation().extras.state.view;
-       ;
+      
+          this.photo=this.user.photo;
           // console.log( this.user.picture);
         //  this.displayPlanner = true
           //this.plannerData = this.router.getCurrentNavigation().extras.state.data

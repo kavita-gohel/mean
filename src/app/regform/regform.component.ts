@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { UserService } from '../service/user.service';
-import { PutComponent } from '../user/user-list/put/put.component';
+
 @Component({
   selector: 'app-regform',
   templateUrl: './regform.component.html',
@@ -28,13 +28,13 @@ export class RegformComponent implements OnInit {
   emailregex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   hobby:any = [];
   user: any;
-  
+  hide: boolean = true
   // hobby ['Travelling','Swmming','Cooking','Singing','Reading']
   constructor(private router: Router, private _userService : UserService, public dialogRef: MatDialogRef<RegformComponent>,
     @Inject(MAT_DIALOG_DATA) private data) { }
   
   ngOnInit() {
-     console.log("data...",this.data);
+    //  console.log("data...",this.data);
     
        this.createForm(this.data.data);
       
@@ -57,6 +57,7 @@ export class RegformComponent implements OnInit {
       mono: new FormControl((data && data.mono)? data.mono : '', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
       hobby: new FormControl((data && data.hobby)? data.hobby : '', Validators.required),
       photo: new FormControl((data && data.photo)? data.photo : '',Validators.required),
+      password: new FormControl ((data && data.password)? data.password : '',[Validators.required, Validators.minLength(6)])
       // photo: new FormData(photo) 
       // this.formData.append('photo',photo);
     // this = this.formBuilder.group({
@@ -89,7 +90,10 @@ export class RegformComponent implements OnInit {
   //   //   'hobby': ['',Validators.required]
   //   });
   // }
-  
+  get hobbies() {
+   
+    return this.formGroup.get('hobbies') as FormControl
+  }
  
   get gender() {
    
@@ -111,6 +115,9 @@ export class RegformComponent implements OnInit {
   get picture() {
     return this.formGroup.get('photo') as FormControl
   }
+  get password() {
+    return this.formGroup.get('password') as FormControl
+  }
  
   // checkInUseEmail(control) {
   //   // mimic http database access
@@ -123,10 +130,10 @@ export class RegformComponent implements OnInit {
   //     }, 1000)
   //   })
   // }
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
-    console.log("image",this.fileToUpload);
-}
+//   handleFileInput(files: FileList) {
+//     this.fileToUpload = files.item(0);
+//     console.log("image",this.fileToUpload);
+// }
   getErrorEmail() {
     return this.formGroup.get('email').hasError('required') ? 'Field is required' :
       this.formGroup.get('email').hasError('pattern') ? 'Not a valid emailaddress' :
@@ -150,11 +157,12 @@ export class RegformComponent implements OnInit {
      
      }
     else{
-      this.formData.append('photo',this.formGroup.value.photo);
+      // this.formData.append('photo',this.formGroup.value.photo);
       this._userService.addUser(this.formGroup.value)
         .subscribe(data => {
         
           console.log("post--->",data);
+          this.post = post;
       } );
 
       

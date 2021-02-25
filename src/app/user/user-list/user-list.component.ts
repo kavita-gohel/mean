@@ -1,3 +1,5 @@
+import { ViewpostComponent } from './../../viewpost/viewpost.component';
+// import { PostComponent } from '../posts/post.component';
 
 import { SocialLoginModule, SocialUser } from 'angularx-social-login';
 import { SingleUserComponent } from './../single-user/single-user.component';
@@ -7,8 +9,9 @@ import { Component, OnInit, Output, EventEmitter, Input, Inject } from '@angular
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'angularx-social-login';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PutComponent } from './put/put.component';
+import { PostsComponent } from 'src/app/posts/posts.component';
 import { RegformComponent } from 'src/app/regform/regform.component';
+import { HttpParams } from '@angular/common/http';
 
 
 
@@ -57,7 +60,7 @@ export class UserListComponent implements OnInit {
                 }
                 });
 
-
+               
       // console.log(this.router.getCurrentNavigation().extras.state.view); 
     
   }
@@ -98,6 +101,14 @@ export class UserListComponent implements OnInit {
     
      }
      this.dialog.open(RegformComponent,{data: obj});
+
+    }
+
+    
+      
+    
+   
+    
     //  this.dialogRef.afterClosed().subscribe(result => {  
                     
     // }); 
@@ -113,7 +124,7 @@ export class UserListComponent implements OnInit {
      
       // });
       
-    }
+    
 
        deleteProfile(id:any,index){
               console.log("deleted data-->",id,index)
@@ -128,7 +139,18 @@ export class UserListComponent implements OnInit {
           this.user.splice(index,1);
         }
     
+        addPost(){
+        console.log("opne dialoage of add new post()");
+        
+        this.dialog.open(PostsComponent);
+        }
 
+
+        viewPost(){
+          console.log("view post");
+          // this.dialog.open(ViewpostComponent);
+          this.router.navigateByUrl('/viewpost');
+        }
 
     // profileRegistration(data:any){
     //   this.data =  data;

@@ -21,7 +21,7 @@ export class SingleUserComponent implements OnInit {
   // gen: Array<any> = ['male','male','female','male','male','female','female','male','male','female'];
   // dob: Array<any> = ['7/9/2000','4/24/2002','9/28/2012','2/6/2020	','12/23/2003','12/25/2001','1/29/2011','3/8/2017','2/3/2007','7/27/2014'];
   user : any
-  profile:any;
+  
   data: any;
   hobby: any = [];
   photo: any;
@@ -37,10 +37,10 @@ export class SingleUserComponent implements OnInit {
         if (this.route.getCurrentNavigation().extras.state.view) {
           console.log("in second if, data is", this.route.getCurrentNavigation().extras.state.view);
           this.user = this.route.getCurrentNavigation().extras.state.view;
-          this.photo=this.user.photo;
+          // this.photo=this.user.photo;
           this.hobby = this.user.hobby;
-          console.log(this.hobby)
-          // console.log("hobbylist in single profile",this.hobby);
+          // console.log(this.hobby)
+           console.log("hobbylist in single profile",this.hobby);
           // console.log("profile rul=======>",this.profile)
           //  this.displayPlanner = true
           //this.plannerData = this.router.getCurrentNavigation().extras.state.data
@@ -52,6 +52,12 @@ export class SingleUserComponent implements OnInit {
 
 
   ngOnInit(): void {
+    // this._userService.getData().subscribe((data) => {
+    //   // console.log(data);
+    //   this.user = data;
+    //   console.log("get data----",this.user);
+      
+    //   })
   }
   
   addNote(user: any){

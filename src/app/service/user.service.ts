@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 
@@ -17,9 +17,34 @@ export class UserService {
 
     public getData():Observable<any>{
       
-     return this.http.get('http://localhost:3001/user');
+     return this.http.get('http://localhost:3001/user',{
+      observe:'body',
+      
+    });
+     
     }
 
+    login(body:any):Observable<any>{
+      return this.http.post('http://localhost:3001/', body,{
+        observe:'body',
+        params: new HttpParams().append('token', localStorage.getItem('token'))
+      });
+    }
+
+  //   login(email: string, password: string) {
+  //     return this.http.post<any>('http://localhost:3001/, { email, password })
+  //         .pipe(map(user => {
+  //             // login successful if there's a jwt token in the response
+  //             if (user && user.token) {
+  //                 // store user details and jwt token in local storage to keep user logged in between page refreshes
+  //                 localStorage.setItem('currentUser', JSON.stringify(user));
+  //                 this.currentUserSubject.next(user);
+  //             }
+
+  //             return user;
+  //         }));
+  // }
+    
     addUser(newUser:any){
    
       var headers = new HttpHeaders();
@@ -38,7 +63,7 @@ export class UserService {
       var headers = new HttpHeaders();
       headers.append('Content-Type', 'application/json');
       return this.http.put('http://localhost:3001/user/'+id,data,{headers: headers});
-     
+
     }
 
     

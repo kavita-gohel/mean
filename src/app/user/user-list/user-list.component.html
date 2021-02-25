@@ -9,7 +9,9 @@
         <tr>  
               <td></td>
             <td>
-                <button mat-raised-button>Add New User</button>
+                <button mat-raised-button (click)="addPost()">Add Post</button>
+                &nbsp;&nbsp;
+                <button mat-raised-button (click)="viewPost()">View Post</button>
             </td>
         </tr>
     </table>
@@ -53,6 +55,8 @@
           <button mat-raised-button (click)="viewProfile(item)" >View Full Profile</button>
           <button mat-raised-button (click)="openDialog(item)">Update Profile</button>
           <button mat-raised-button (click)="deleteProfile(item._id,i)" >Delete Profile</button>
+          <!-- <button mat-raised-button (click)="viewPost(item._id)" >View Posts</button> -->
+        
        </div>
 
   </mat-expansion-panel>

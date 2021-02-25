@@ -1,0 +1,26 @@
+
+    <mat-toolbar>
+        <span class="fill-remaining-space">Add new Post </span>
+      </mat-toolbar>
+    <mat-dialog-content class="mat-typography">
+        
+    <div class="container" novalidate> 
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form" >
+             <mat-form-field class="form-element">
+                <input matInput placeholder="Title" formControlName="title" >
+            </mat-form-field>
+            <mat-form-field class="form-element">
+              <input matInput placeholder="Type" formControlName="type">
+            </mat-form-field>
+            <mat-form-field class="form-element">
+                    <mat-label>Content</mat-label>
+                    <textarea matInput placeholder="Write your Content here...." formControlName="content"></textarea>
+            </mat-form-field>
+            <div class="form-element">
+                <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Add Post</button>
+              </div>
+        </form>
+    </div>
+
+    </mat-dialog-content>
+
