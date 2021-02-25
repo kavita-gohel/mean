@@ -56,7 +56,7 @@ export class RegformComponent implements OnInit {
       gender: new FormControl((data && data.gender)? data.gender : '', Validators.required),
       mono: new FormControl((data && data.mono)? data.mono : '', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
       hobby: new FormControl((data && data.hobby)? data.hobby : '', Validators.required),
-      photo: new FormControl((data && data.photo)? data.photo : '',Validators.required),
+      // photo: new FormControl((data && data.photo)? data.photo : '',Validators.required),
       password: new FormControl ((data && data.password)? data.password : '',[Validators.required, Validators.minLength(6)])
       // photo: new FormData(photo) 
       // this.formData.append('photo',photo);
@@ -157,10 +157,9 @@ export class RegformComponent implements OnInit {
      
      }
     else{
-      // this.formData.append('photo',this.formGroup.value.photo);
+      this.formData.append('photo',this.formGroup.value.photo);
       this._userService.addUser(this.formGroup.value)
         .subscribe(data => {
-        
           console.log("post--->",data);
           this.post = post;
       } );
