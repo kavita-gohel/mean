@@ -1,60 +1,62 @@
-// const express = require('express');
-// const multer = require('multer');
-// const app = express();
-// const imgUpload = require('../service');
-const express = require('express')
-const user = require('../controllers/user.controller.js');
+const mongoose = require('mongoose');
+const multer = require('multer');
+const express = require('express');
 const router = express.Router();
-multer = require('multer'),
-mongoose = require('mongoose'),
+var upload = multer({dest: './uploads'});
+const user = require('../controllers/user.controller.js');
+
+
      
-     // router.post('/user', upload.single('photo'), user.create) 
-     router.post('/user',user.create);
+    
+     // router.post('/user',user.create);
      router.post('/',user.login);
      router.get('/user', user.findAll);
      router.get('/user/:_id', user.findOne);   
      router.put('/user/:_id', user.update);
      router.delete('/user/:_id', user.delete);
 
-module.exports = router;
+
+
+
+
+
+// Multer File upload settings
+const DIR = './uploads/';
 
 const storage = multer.diskStorage({
-     destination: (req, file, cb) => {
-         cb(null, DIR);
-     },
-     filename: (req, file, cb) => {
-         const fileName = file.originalname.toLowerCase().split(' ').join('-');
-         cb(null, fileName)
-     }
- });
- 
- 
- // Multer Mime Type Validation
- var upload = multer({
-     storage: storage,
-     limits: {
-         fileSize: 1024 * 1024 * 5
-     },
-     fileFilter: (req, file, cb) => {
-         if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-             cb(null, true);
-         } else {
-             cb(null, false);
-             return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
-         }
-     }
- });
- 
+    destination: (req, file, cb) => {
+        cb(null, DIR);
+    },
+    filename: (req, file, cb) => {
+        const fileName = file.originalname.toLowerCase().split(' ').join('-');
+        cb(null, fileName)
+    }
+});
+
+
+// Multer Mime Type Validation
+var upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+            cb(null, true);
+        } else {
+            cb(null, false);
+            return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+        }
+    }
+});
+
+
+router.post('/user', upload.single('photo'), user.create); 
 
 
 
 
-
-
-
-
-
-
+module.exports = router;
 
 // // var upload = multer({ dest: 'uploads/' });
 // module.exports = (app) => {

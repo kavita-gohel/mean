@@ -23,8 +23,8 @@ const app = express();
    
          daoFile.create(req)
             .then((data) => {
-            
-              return  res.send(data);
+              return  res.status(201).json({ data })      
+            //   return  res.send(data);
               
             })
             .catch((err) => {

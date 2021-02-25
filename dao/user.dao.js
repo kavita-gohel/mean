@@ -18,7 +18,7 @@ const { ObjectID } = require('mongodb');
             mono: req.body.mono,
             gender: req.body.gender,
             hobby : req.body.hobby,
-            // photo : url + '/uploads/' + req.file.filename,
+            photo : url + '/uploads/' + req.file.filename,
             password : req.body.password,
             // password: User.hashPassword(req.body.password)
             // photo: url+"/uploads/"+req.file.filename
@@ -31,7 +31,7 @@ const { ObjectID } = require('mongodb');
             reject({status:404,"message":"error occur at insertion"})
         }
         else {
-            resolve({status:200,"message":"Add data sucessfully  ","User : ":data})
+            resolve({status:200,"message":"Add data sucessfully  ",user:data})
             
         }
         })
@@ -133,7 +133,7 @@ const { ObjectID } = require('mongodb');
 
     daoFile.update = (req) => {
         return new Promise((resolve,reject) => {
-            
+            // const url = req.protocol + '://' + req.get('host')
             User.findByIdAndUpdate(
                         req.params._id,
                         {
@@ -144,7 +144,7 @@ const { ObjectID } = require('mongodb');
                             gender: req.body.gender,
                             hobby : req.body.hobby,
                             password : req.body.password,
-                            
+                            // photo: url + '/uploads/' + req.file.filename,
                             // password: User.hashPassword(req.body.password),
                     }, {new: true}
             )
