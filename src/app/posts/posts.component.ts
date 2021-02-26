@@ -60,7 +60,7 @@ export class PostsComponent implements OnInit {
         console.log("post--->",data);
        this.post = post;
       } );
-      // this.dialogRef.close(this.data);
+      this.dialogRef.close(this.data);
             //  this.post = post;
     }
 

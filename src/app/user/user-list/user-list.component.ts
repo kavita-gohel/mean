@@ -72,7 +72,10 @@ export class UserListComponent implements OnInit {
       });
         //  this.user = this._userService.getData();
         // this.user.push( this.userReg);
- 
+//         const usertoken = req.headers.authorization;
+// const token = usertoken.split(' ');
+// const decoded = jwt.verify(token[1], 'secret-key');
+// console.log(decoded);
         this._userService.getData().subscribe((data) => {
         // console.log(data);
         this.user = data;

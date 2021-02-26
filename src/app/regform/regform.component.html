@@ -9,22 +9,22 @@
 
           <mat-form-field class="form-element">
             <input matInput placeholder="First name" formControlName="fname" >
-            <mat-error *ngIf="!fname.valid && fname.touched">
+            <!-- <mat-error *ngIf="!fname.valid && fname.touched">
               {{ titleAlert }}
-            </mat-error>
+            </mat-error> -->
             </mat-form-field>
           <mat-form-field class="form-element">
           <input matInput placeholder="Last name" formControlName="lname">
-            <mat-error *ngIf="!lname.valid && lname.touched">
+            <!-- <mat-error *ngIf="!lname.valid && lname.touched">
               {{ titleAlert }}
-            </mat-error>
+            </mat-error> -->
            </mat-form-field>
        
            <mat-form-field class="form-element">
         <input matInput placeholder="Email address" formControlName="email" type="email">
-        <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
+        <!-- <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
           {{ getErrorEmail() }}
-        </mat-error>
+        </mat-error> -->
            </mat-form-field>
 
            <mat-form-field class="form-element">
@@ -37,16 +37,16 @@
                 {{hide ? 'visibility_off' : 'visibility'}}
             </mat-icon>
         <!-- </button> -->
-        <mat-error *ngIf="!formGroup.controls['password'].valid">
+        <!-- <mat-error *ngIf="!formGroup.controls['password'].valid">
             Password is required
-          </mat-error>
+          </mat-error> -->
         </mat-form-field>
 
           <mat-form-field class="form-element">
         <input matInput placeholder="Mobile number" formControlName="mono" type="tel">
-          <mat-error *ngIf="!formGroup.controls['mono'].valid && formGroup.controls['mono'].touched">
+          <!-- <mat-error *ngIf="!formGroup.controls['mono'].valid && formGroup.controls['mono'].touched">
             {{ getErrorContact() }}
-          </mat-error>
+          </mat-error> -->
             </mat-form-field>
            <div class="form-element">
         <label>Gender : </label>
@@ -77,7 +77,8 @@
                       name="photo"
                       accept="image/*"
                       (change)="uploadImage($event)"
-              formControlName="photo"/>
+                      formControlName="photo"
+            />
               </div>
               <!-- <div class="form-element">
                 <mat-form-field>

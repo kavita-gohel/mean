@@ -1,6 +1,6 @@
 
     <mat-toolbar>
-        <span class="fill-remaining-space">Add new Post </span>
+        <span class="fill-remaining-space">Add | Update Post </span>
       </mat-toolbar>
     <mat-dialog-content class="mat-typography">
         
@@ -17,7 +17,7 @@
                     <textarea matInput placeholder="Write your Content here...." formControlName="content"></textarea>
             </mat-form-field>
             <div class="form-element">
-                <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Add Post</button>
+                <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Submit</button>
               </div>
         </form>
     </div>
