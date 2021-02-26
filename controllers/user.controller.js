@@ -3,7 +3,7 @@ const multer = require('multer');
 // var upload = multer({ dest: 'uploads/' });
 const daoFile = require('../dao/user.dao');
 const { findOneAndUpdate, create } = require('../models/user.model.js');
-
+const jwt = require('jsonwebtoken');
 const userController = {};
 const app = express();
 // const imgUpload = require('../service');
@@ -14,7 +14,8 @@ const app = express();
 // }
     // var router = express.Router();
     // const fs = require('fs');
-  
+
+
     
       userController.create = (req, res) => {
         // imgUpload(req);
@@ -34,13 +35,14 @@ const app = express();
 
   
     userController.login = (req, res) => {
+      
         daoFile.login(req,res)
         .then((data) => {
          console.log("psw-->",user.data.password);
          flag= delete user.data.password;
          console.log("flag",flag);
             console.log("data on login() controller--->",data);
-            return  res.send(data)
+             return  res.send(data)
             
         })
         .catch((err) => {

@@ -11,12 +11,15 @@ const userSchema = mongoose.Schema({
     gender: String,
     hobby : Array,
     photo: String,
-    // posts: Array
     posts: [{ type: mongoose.Schema.Types.ObjectId, ref:'Post' }]
     }, 
     {
     timestamps: true
     });
+
+
+
+
 
 // const jwt = mongoose.Schema({
 //     email: String,
@@ -33,4 +36,4 @@ const userSchema = mongoose.Schema({
 // userSchema.methods.isValid = function(hashedpassword){
 //     return  bcrypt.compareSync(hashedpassword, this.password);
 // }
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema)

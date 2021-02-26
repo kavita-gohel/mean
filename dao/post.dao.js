@@ -47,9 +47,9 @@ const User = require('../models/user.model.js');
 
     daoFile.getPost = (req) => {
         return new Promise((resolve, reject) => {
-         
+            
             Post.find({userid: req.params.userid})
-            // console.log("req.params.userid", req.params.userid)
+            .populate('userid', User)
             .exec((err,data)=>{
                 if(err){    
                     reject(err)

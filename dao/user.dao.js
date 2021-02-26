@@ -1,16 +1,21 @@
 const mongoose = require('mongoose');
 const daoFile = require('../controllers/user.controller.js');
 const User = require('../models/user.model.js');
+const Post = require('../models/post.model.js')
 const jwt = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
-
+const jwt_decode = require("jwt-decode");
 // const daoFile = {};
-
+const post = new Post;
     daoFile.create = (req) => {
-        const url = req.protocol + '://' + req.get('host')
+        // console.log("req.token",req.token);
+        // const url = req.protocol + '://' + req.get('host')
+        // jwt.verify(token, secret, options, function(err, decoded) {
+        //     console.log("verify function") // bar
+        //   });
         return new Promise((resolve,reject)=>{
-            // console.log("create pic....",req.body.photo);
-            console.log("create....",req.body);
+            console.log("create pic....",req.body);
+            // console.log("create....",req.body);
             const user = new User({
             email: req.body.email, 
             fname: req.body.fname,
@@ -18,11 +23,13 @@ const { ObjectID } = require('mongodb');
             mono: req.body.mono,
             gender: req.body.gender,
             hobby : req.body.hobby,
-            photo : url + '/uploads/' + req.file.filename,
+            // photo: req.body.photo,    
+            photo : req.body.filename,
             password : req.body.password,
             // password: User.hashPassword(req.body.password)
             // photo: url+"/uploads/"+req.file.filename
            });
+         
         user.save((err,data)=>{
         if(err){
             reject(err)
@@ -39,17 +46,20 @@ const { ObjectID } = require('mongodb');
    }
 
    daoFile.login =(req,res) => {
+  
        return new Promise((resolve,reject) => {
         User.findOne({email:req.body.email}
-            )
+         )
             .lean()
         .exec((err,data)=>{
         if(data){
-            console.log(data)
+            console.log("user data!!!!!",data)
             // if(data.isValid(req.body.password)){
             if(data.password == req.body.password){
-                let token = jwt.sign({email:data.email},'secret', {expiresIn : '3h'});
-                // console.log("token--->",token);
+               let token = jwt.sign(data,'secret', {expiresIn : '3h'});
+                console.log("Generated Token--->",token);
+                var decoded = jwt_decode(token);
+                console.log("Decrypted Token--->",decoded);
                 // console.log("data--->",data);
                 user = {
                     'token' : token,
@@ -73,8 +83,9 @@ const { ObjectID } = require('mongodb');
     daoFile.find = (req) => {
         return new Promise((resolve, reject) => {
        
-            User.find()
-            .exec((err,data)=>{
+                User.find()
+                .populate('posts',Post)    
+                .exec((err,data)=>{
                 if(err){
                     reject(err)
                 }
@@ -94,6 +105,7 @@ const { ObjectID } = require('mongodb');
     daoFile.findOne = (req) => {
         return new Promise((resolve,reject)=>{
             User.findById(req.params._id)
+            .populate('posts',Post)   
             .exec((err,id)=>{
                 if(err){
                     reject(err)
@@ -102,6 +114,7 @@ const { ObjectID } = require('mongodb');
                     reject({status:404,"message":"user not found Check Id"})
                 }
                 else{
+                    // console.log("Populated User " + posts);
                     resolve({status:200,"message":"user get sucessfully","user":id})
                 }
             })
