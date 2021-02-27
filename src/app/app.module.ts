@@ -42,6 +42,7 @@ import { MatAutocompleteModule, MatButtonToggleModule, MatCheckboxModule, MatChi
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { PostsComponent } from './posts/posts.component';
 import { CdkColumnDef } from '@angular/cdk/table';
+import { JwPaginationComponent } from 'jw-angular-pagination';
 
 let config = new AuthServiceConfig([
   {
@@ -70,11 +71,13 @@ export function provideConfig() {
     PostsComponent,
     RegformComponent,
     ViewpostComponent ,
-    EditpostComponent
+    EditpostComponent,
+    JwPaginationComponent
   ],
  
   imports: [
-
+    MatTableModule,
+    MatPaginatorModule,
     ReactiveFormsModule,
     MatDialogModule,
     BrowserModule,

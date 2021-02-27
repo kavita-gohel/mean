@@ -1,13 +1,15 @@
+import { filter } from 'rxjs/operators';
 import { PostService } from './../service/post.service';
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit,Inject, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MatPaginator, MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { EditpostComponent } from '../editpost/editpost.component';
 import { PostsComponent } from '../posts/posts.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 @Component({
   selector: 'app-viewpost',
   templateUrl: './viewpost.component.html',
@@ -22,12 +24,21 @@ import { PostsComponent } from '../posts/posts.component';
 })
 export class ViewpostComponent implements OnInit{
 
- 
+   
   columnsToDisplay = ['title','edit','delete'];
   post: any;
   dataSource:any
   userReg: any;
-
+  val: any;
+  filterValues = {title: ''};
+  paginator = MatPaginator;
+  titleFilter = new FormControl('');
+  private readonly newProperty = 'paginator';
+  // @ViewChild('paginator') paginator: MatPaginator;
+  // @ViewChild(MatPaginator, { static: true }) set matPaginator(mp: MatPaginator) {
+  //   this.paginator = mp;
+ 
+  // }
   constructor( public dialog: MatDialog, private postService : PostService, private router: Router, private route: ActivatedRoute) { 
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras && this.router.getCurrentNavigation().extras.state) {
@@ -37,30 +48,52 @@ export class ViewpostComponent implements OnInit{
            this.dataSource = this.router.getCurrentNavigation().extras.state.view;
           //  this.user.push( this.router.getCurrentNavigation().extras.state.view);
           
+            
           //this.plannerData = this.router.getCurrentNavigation().extras.state.data
                   }
                 }
                 });
+                // console.log(this.dataSource);
+                
+          // console.log(this.router.getCurrentNavigation().extras.state.view); 
+          // this.dataSource.title = this.dataSource;
+          
+          // this.dataSource.filterPredicate = this.createFilter();
+        }
+        
 
-               
-      // console.log(this.router.getCurrentNavigation().extras.state.view); 
-    
-  }
-  // constructor(private postService: PostService,public dialog: MatDialog, private router: Router) {} 
-  
+        // createFilter(): (data: any, filter: string) => boolean {
+        //   let filterFunction = function(data, filter): boolean {
+        //     let searchTerms = JSON.parse(filter);
+        //     console.log("createfilter function");
+        //     return data.name.toLowerCase().indexOf(searchTerms.title) !== -1
+           
+        //   }
+        //   return filterFunction;
+        // }
+
+       
+ 
       ngOnInit() {
           let val = JSON.parse(localStorage.getItem('token'));
           const id = val.user.data._id;
           console.log("id....",id);
-                this.postService.getPost(id).subscribe((data) => {
-                  
-                  console.log("get post data----",data);
-                  this.dataSource = data;
-          })
-      
+          
+         this.postService.getPost(id).subscribe((data) => {
+         console.log("get post data----",data);
+         this.dataSource = data
+         this.dataSource.paginator = this.paginator;
+         })
+       
         }
 
-        editPost(data:any){
+       applyFilter(event:any){
+        this.dataSource.filter((data)=>{
+          
+        })
+      }
+
+         editPost(data:any){
            console.log("edit post---->",data);
            let obj ={
             data:data,

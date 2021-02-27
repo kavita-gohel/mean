@@ -12,7 +12,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { EditpostComponent } from './editpost/editpost.component';
-
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 const routes: Routes = [
     {

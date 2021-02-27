@@ -155,6 +155,11 @@ export class UserListComponent implements OnInit {
           this.router.navigateByUrl('/viewpost');
         }
 
+        viewUserPost(data:any){
+          console.log("view selescted user post");
+          this.router.navigateByUrl('/viewpost',data);
+        }
+
     // profileRegistration(data:any){
     //   this.data =  data;
     //   this.router.navigateByUrl('/profile', { state: { view: this.data } });
