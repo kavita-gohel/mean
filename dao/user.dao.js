@@ -9,7 +9,7 @@ const jwt_decode = require("jwt-decode");
 const post = new Post;
     daoFile.create = (req) => {
         // console.log("req.token",req.token);
-        // const url = req.protocol + '://' + req.get('host')
+        const url = req.protocol + '://' + req.get('host')
         // jwt.verify(token, secret, options, function(err, decoded) {
         //     console.log("verify function") // bar
         //   });
@@ -23,8 +23,8 @@ const post = new Post;
             mono: req.body.mono,
             gender: req.body.gender,
             hobby : req.body.hobby,
-            // photo: req.body.photo,    
-            photo : req.body.filename,
+            photo: req.body.photo,    
+            // photo : req.body.file,
             password : req.body.password,
             // password: User.hashPassword(req.body.password)
             // photo: url+"/uploads/"+req.file.filename
@@ -84,7 +84,8 @@ const post = new Post;
         return new Promise((resolve, reject) => {
        
                 User.find()
-                .populate('posts',Post)    
+                // .populate('posts','title')  
+                .populate('posts','title type')  
                 .exec((err,data)=>{
                 if(err){
                     reject(err)
@@ -105,7 +106,8 @@ const post = new Post;
     daoFile.findOne = (req) => {
         return new Promise((resolve,reject)=>{
             User.findById(req.params._id)
-            .populate('posts',Post)   
+            .populate('posts','title')  
+            // .populate('posts',Post)   
             .exec((err,id)=>{
                 if(err){
                     reject(err)

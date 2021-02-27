@@ -49,7 +49,8 @@ const User = require('../models/user.model.js');
         return new Promise((resolve, reject) => {
             
             Post.find({userid: req.params.userid})
-            .populate('userid', User)
+            // .populate('userid', User)
+            .populate('userid','email')  
             .exec((err,data)=>{
                 if(err){    
                     reject(err)
